@@ -1,12 +1,12 @@
 <?php
 
-$con=mysqli_connect('localhost','root','','practice');
+$con=mysqli_connect('localhost','root','',"websitedbms");
 
 function getInputValue($name) {            //called in value attribute echo to remember inputs after login reg failed
 		if(isset($_POST[$name])) {
 			echo  $_POST[$name];
 		}
-	}?>
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,10 +36,16 @@ function getInputValue($name) {            //called in value attribute echo to r
     </form>
     <?php
     if (isset($_POST['visit'])) {
-        $q ="SELECT NOw()";
+        $url=$_POST['search'];
+        echo $url;
+        $q="INSERT INTO Visits VALUES(CURDATE(),CURTIME(),'glen121','$url')";  ;
         $result=$con->query($q);
-        $row = $result->fetch_array(MYSQLI_NUM);
-        echo $row[0];
+        if($result==true){
+            echo "insert success";
+        }else{
+            echo mysqli_error($con);
+        }
+
         
         
     }
@@ -47,7 +53,7 @@ function getInputValue($name) {            //called in value attribute echo to r
     ?>
     <p> To know the number of visitors on your website</p>
     <a href="create.php">Click here</a>
-    
+
 </form>
 </body>
 </html>
