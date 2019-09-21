@@ -14,7 +14,7 @@
 <body>
     
 <div class="justify-content-center" >
-	<form action="index.php" method="POST" >
+	<form action="developers.php" method="POST" >
 
     <div class="form-group">
 		<label for="website_name">Website Name</label>
@@ -32,19 +32,17 @@
 		<label for="website_url">Website URL</label>
 	    <input id="website_url" type="text" name="website_url" class="form-control" placeholder="Enter website url" >
     </div>
-
+    <div class="form-group">
+		<label for="noofdevelopers">No. of Developers</label>
+	    <input id="noofdevelopers" type="text" name="noofdevelopers" class="form-control" placeholder="Enter no of developers" >
+    </div>
+    <p> click submit to enter info about developers</p>
     <div class="form-group">
          <button type="submit" class="btn btn-primary" name="save">SUBMIT</button>
     </div>
-
-    <p>Enter info about developers</p>
-    <?php for($i=1;$i<=5;$i++){
-      echo "<div class='form-group'>
-      <label for='website_url'>Website URL $i</label><input id='website_url' type='text' name='website_url' class='form-control' placeholder='Enter website url' ></div>";
-    }
-    
-    ?>
  
+    
+     
     </form>
 </div>
 </body>
