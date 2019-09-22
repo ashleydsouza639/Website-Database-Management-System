@@ -1,8 +1,8 @@
 <?php
 
-$con=mysqli_connect('localhost','root','',"websitedbms");
+include('config.php');
 
-function getInputValue($name) {            //called in value attribute echo to remember inputs after login reg failed
+function getInputValue($name) {            //called in value attribute echo to remember inputs 
 		if(isset($_POST[$name])) {
 			echo  $_POST[$name];
 		}
@@ -34,25 +34,29 @@ function getInputValue($name) {            //called in value attribute echo to r
     <input id="s" type="search" name="search" autocomplete="off" value="<?php getInputValue('search') ?>" required>
     <button type="submit" name="visit" onclick="newtab()">Visit</button>    
     </form>
+    
     <?php
     if (isset($_POST['visit'])) {
         $url=$_POST['search'];
         echo $url;
-        $q="INSERT INTO Visits VALUES(CURDATE(),CURTIME(),'glen121','$url')";  ;
+        $q="INSERT INTO Visits VALUES(CURDATE(),CURTIME(),'ashleydsouza882','$url')";  ;
         $result=$con->query($q);
         if($result==true){
             echo "insert success";
         }else{
             echo mysqli_error($con);
-        }
-
-        
-        
+        }     
     }
-
     ?>
-    <p> To know the number of visitors on your website</p>
+
+    <p> To register your website</p>
     <a href="create.php">Click here</a>
+
+<p>To know number of visitors </p>
+
+<form  action="logs.php" method="POST">
+<button type="submit" name="viewlogs">View Logs</button>
+</form>
 
 </form>
 </body>

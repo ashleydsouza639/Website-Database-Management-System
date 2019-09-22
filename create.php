@@ -1,5 +1,5 @@
 
-
+<?php     include('config.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,18 +15,21 @@
 </head>
 <body>
     
+
+
+    
 <div class="justify-content-center" >
 	<form action="developers.php" method="POST" >
 
     <div class="form-group">
 		<label for="website_name">Website Name</label>
-	    <input id="website_name" type="text" name="name" class="form-control" placeholder="Enter website name" >
+	    <input id="website_name" type="text" name="website_name" class="form-control" placeholder="Enter website name" >
     </div>
 
 
 
     <div class="form-group">
-		<label for="website_type">Website Name</label>
+		<label for="website_type">Website Type</label>
 	    <input id="website_type" type="text" name="website_type" class="form-control" placeholder="Enter website type" >
     </div>
 
@@ -36,7 +39,7 @@
     </div>
     <div class="form-group">
 		<label for="noofdevelopers">No. of Developers</label>
-	    <input required id="noofdevelopers" type="text" name="no" class="form-control" placeholder="Enter no of developers" >
+	    <input required id="noofdevelopers" type="text" name="noofdevelopers" class="form-control" placeholder="Enter no of developers" >
     </div>
     <p> click submit to enter info about developers</p>
     <div class="form-group">
@@ -47,19 +50,9 @@
      
     </form>
     </div>
-    <?php
-    
+   
 
-    session_start();
- 
-    if (isset($_POST['save'])) {
-      $n=$_POST['no'];
-    
-      $_SESSION['no']=$n;
-      echo $_SESSION['no'];        // You can set the value however you like.
-    }
-    
-    ?>
+
 
 </body>
 </html>

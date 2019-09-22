@@ -1,7 +1,45 @@
+<?php   include('config.php');
+    if (isset($_POST['save'])) {
+        unset($_SESSION['no']);
+  
+        $_SESSION['no']=$_POST['noofdevelopers'];
+        echo $_SESSION['no'];        // You can set the value however you like.
+      }
+      print_r($_SESSION);
+      if(isset($_POST['website_url'])){
+         $_SESSION['website_url'] = $_POST['website_url'];
+  }
+      
+      if(isset($_SESSION['website_url'])){
+            echo "h". $_SESSION['website_url'];
+      }
+      ?>
+
+
 <?php
-session_start();
-echo $_SESSION['no'];  
+
+if (isset($_POST['save'])) {
+  unset($_SESSION['no']);
+
+  $_SESSION['no']=$_POST['noofdevelopers'];
+  echo $_SESSION['no'];        // You can set the value however you like.
+
+  $website_url=$_POST['website_url'];
+  $website_type=$_POST['website_type'];
+  $website_name=$_POST['website_name'];
+
+
+  $q="INSERT INTO Website VALUES('$website_url','$website_type','$website_name')"; 
+    $result=$con->query($q);
+    if($result==true){
+        echo "insert success";
+    }else{
+        echo mysqli_error($con);
+    }
+}
+print_r($_SESSION);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,34 +59,40 @@ echo $_SESSION['no'];
 <?php 
 
 
-if (isset($_POST['no'])) {
-    for ($i=1;$i<=2;$i++) {
+if (isset($_POST['save'])) {
+    for ($i=1;$i<= $_SESSION['no'];$i++) {
         ?>
-<form action='developers.php' method='POST'>
+<form action='finaltable.php' method='POST'>
 
        <div class='form-group'>
-        <label for='fname'>Developers First Name $i</label>
+        <label for='fname'>Developers First Name<?php echo $i ?></label>
         <input id='fname' type='text' name='fname[]' class='form-control' placeholder='Enter first name' >
         </div>
 
         <div class='form-group'>
-        <label for='lname'>Developers Last Name $i</label>
+        <label for='lname'>Developers Last Name <?php echo $i ?></label>
         <input id='lname' type='text' name='lname[]' class='form-control' placeholder='Enter last name' >
-        </div>;
-      
+        </div>
+      <!-- not working insert  gender in db
         <div class='form-group'>
-        <label for='dname'>Developers Gender $i</label>
-        <input type='radio' name='gender[]' value='female'>Female
-        <input type='radio' name='gender[]' value='male'>Male
-        <input type='radio' name='gender[]' value='other'>Other<br>;
+        <label for='gender'>Developers Gender <?php echo $i ?></label>
+        <input type='radio' name='gender<?php echo $i?>[]' value='female'>Female
+        <input type='radio' name='gender<?php echo $i?>[]' value='male'>Male
+        <input type='radio' name='gender<?php echo $i?>[]' value='other'>Other<br>
+         -->
+         
+        <div class='form-group'>
+        <label for='gender'>Developers Gender <?php echo $i ?></label>
+        <input id='lname' type='text' name='gender[]' class='form-control' placeholder='Enter gender' >
+        </div>
 
         <div class='form-group'>
-        <label for='designation'>Developers Designation $i</label>
-        <input id='desigation' type='text' name='designation[]' class='form-control' placeholder='Enter designation' >
-        </div>;
+        <label for='designation'>Developers Designation <?php echo $i ?></label>
+        <input id='designation' type='text' name='designation[]' class='form-control' placeholder='Enter designation' >
+        </div>
 
         <div class='form-group'>
-        <label for='dob'>Developers dob $i</label>
+        <label for='dob'>Developers dob <?php echo $i ?></label>
         <input id='dob' type='text' name='dob[]' class='form-control' placeholder='dob eg:1999-12-22' >
         </div> 
         <hr style='width: 100%; color: black; height: 1px; background-color:black;' />
@@ -60,11 +104,34 @@ if (isset($_POST['no'])) {
 
 <?php
 
-if (isset($_POST['done'])) {
-   /*  $fn=$_POST([fname][0]);
-    echo $fn; */
-    
+if (isset($_POST["done"])) {
+    // Check if any option is selected
+    for($i=0;$i< $_SESSION['no'];$i++){
+        echo $_POST['dob'][$i];
 
+        $website_url= $_SESSION['website_url'];
+        $fname=$_POST['fname'][$i];
+        $lname=$_POST['lname'][$i];
+        $gender=$_POST['gender'][$i];
+        $designation=$_POST['designation'][$i];
+        $dob=$_POST['dob'][$i];
+
+
+        $q="INSERT INTO Developer(first_name,last_name,gender,designation,DOB,website_url) VALUES('$fname','$lname','$gender','$designation','$dob','$website_url');"; 
+        $result=$con->query($q);
+        if($result==true){
+            echo "insert success";
+        }else{
+            echo mysqli_error($con);
+        }
+    
+    }
+    if (isset($_POST["fname"]) and isset($_POST["lname"]) and isset($_POST["gender"]) and isset($_POST["designation"]) and isset($_POST["dob"])  ) {
+        // Retrieving each selected option
+        foreach ($_POST['dob'] as $subject) {
+            print "You selected $subject<br/>";
+        }
+    }
 }
 ?>
 
