@@ -1,3 +1,8 @@
+<?php
+session_start();
+echo $_SESSION['no'];  
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,55 +18,51 @@
 </head>
 <body>
     
+<?php 
 
+
+if (isset($_POST['no'])) {
+    for ($i=1;$i<=2;$i++) {
+        ?>
 <form action='developers.php' method='POST'>
 
        <div class='form-group'>
         <label for='fname'>Developers First Name $i</label>
-        <input id='fname' type='text' name='fname' class='form-control' placeholder='Enter first name' >
+        <input id='fname' type='text' name='fname[]' class='form-control' placeholder='Enter first name' >
         </div>
 
         <div class='form-group'>
         <label for='lname'>Developers Last Name $i</label>
-        <input id='lname' type='text' name='lname' class='form-control' placeholder='Enter last name' >
+        <input id='lname' type='text' name='lname[]' class='form-control' placeholder='Enter last name' >
         </div>;
       
         <div class='form-group'>
         <label for='dname'>Developers Gender $i</label>
-        <input type='radio' name='gender' value='female'>Female
-        <input type='radio' name='gender' value='male'>Male
-        <input type='radio' name='gender' value='other'>Other<br>;
+        <input type='radio' name='gender[]' value='female'>Female
+        <input type='radio' name='gender[]' value='male'>Male
+        <input type='radio' name='gender[]' value='other'>Other<br>;
 
         <div class='form-group'>
         <label for='designation'>Developers Designation $i</label>
-        <input id='desigation' type='text' name='designation' class='form-control' placeholder='Enter designation' >
+        <input id='desigation' type='text' name='designation[]' class='form-control' placeholder='Enter designation' >
         </div>;
 
         <div class='form-group'>
         <label for='dob'>Developers dob $i</label>
-        <input id='dob' type='text' name='dob' class='form-control' placeholder='dob eg:1999-12-22' >
+        <input id='dob' type='text' name='dob[]' class='form-control' placeholder='dob eg:1999-12-22' >
         </div> 
         <hr style='width: 100%; color: black; height: 1px; background-color:black;' />
-        <div class='form-group'> <button type='submit' class='btn btn-primary' name='done'>SUBMIT</button></div>
-</form>
-    
-
+        
+    <?php  }?> 
+    <div class='form-group'> <button type='submit' class='btn btn-primary' name='done'>SUBMIT</button></div>
+     </form>
+    <?php }?>
 
 <?php
-$a=array();
+
 if (isset($_POST['done'])) {
-    
-    $fname=$_POST['fname'];
-    array_push($a, $fname);
-    $lname=$_POST['lname'];
-    array_push($a, $lname);
-    $gender=$_POST['gender'];
-    array_push($a, $gender);
-    $designation=$_POST['designation'];
-    array_push($a, $designation);
-    $dob=$_POST['dob'];
-    array_push($a, $dob);
-    
+   /*  $fn=$_POST([fname][0]);
+    echo $fn; */
     
 
 }

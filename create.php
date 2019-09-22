@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +36,7 @@
     </div>
     <div class="form-group">
 		<label for="noofdevelopers">No. of Developers</label>
-	    <input id="noofdevelopers" type="text" name="noofdevelopers" class="form-control" placeholder="Enter no of developers" >
+	    <input required id="noofdevelopers" type="text" name="no" class="form-control" placeholder="Enter no of developers" >
     </div>
     <p> click submit to enter info about developers</p>
     <div class="form-group">
@@ -44,6 +46,20 @@
     
      
     </form>
-</div>
+    </div>
+    <?php
+    
+
+    session_start();
+ 
+    if (isset($_POST['save'])) {
+      $n=$_POST['no'];
+    
+      $_SESSION['no']=$n;
+      echo $_SESSION['no'];        // You can set the value however you like.
+    }
+    
+    ?>
+
 </body>
 </html>
