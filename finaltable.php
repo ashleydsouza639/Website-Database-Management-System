@@ -108,7 +108,8 @@ $result=$con->query($q) or die($mysqli->error);    //an array
 $row=$result->fetch_array(MYSQLI_NUM);
 echo $row[0]; 
 ?>
-
-
+<hr>
+<span> Click here to go: </span>
+<a href="index.php">Home</a>
 </body>
 </html>
