@@ -102,38 +102,7 @@ if (isset($_POST['save'])) {
      </form>
     <?php }?>
 
-<?php
 
-if (isset($_POST["done"])) {
-    // Check if any option is selected
-    for($i=0;$i< $_SESSION['no'];$i++){
-        echo $_POST['dob'][$i];
-
-        $website_url= $_SESSION['website_url'];
-        $fname=$_POST['fname'][$i];
-        $lname=$_POST['lname'][$i];
-        $gender=$_POST['gender'][$i];
-        $designation=$_POST['designation'][$i];
-        $dob=$_POST['dob'][$i];
-
-
-        $q="INSERT INTO Developer(first_name,last_name,gender,designation,DOB,website_url) VALUES('$fname','$lname','$gender','$designation','$dob','$website_url');"; 
-        $result=$con->query($q);
-        if($result==true){
-            echo "insert success";
-        }else{
-            echo mysqli_error($con);
-        }
-    
-    }
-    if (isset($_POST["fname"]) and isset($_POST["lname"]) and isset($_POST["gender"]) and isset($_POST["designation"]) and isset($_POST["dob"])  ) {
-        // Retrieving each selected option
-        foreach ($_POST['dob'] as $subject) {
-            print "You selected $subject<br/>";
-        }
-    }
-}
-?>
 
 
 </body>

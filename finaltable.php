@@ -5,26 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Unicase" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Unicase|Eater" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Cormorant+Unicase" rel="stylesheet">
 </head>
 <body>
     
  <?php 
   include('config.php');
+
+
+ 
+
+  if (isset($_POST["done"])) {                 //done is defined in finaltable.phpprevious developers page but form action=finaltable.php in prev developers page. hence php code is ddefined in 
+      // Check if any option is selected
+      for($i=0;$i< $_SESSION['no'];$i++){
+          echo $_POST['dob'][$i];
+  
+          $website_url= $_SESSION['website_url'];
+          $fname=$_POST['fname'][$i];
+          $lname=$_POST['lname'][$i];
+          $gender=$_POST['gender'][$i];
+          $designation=$_POST['designation'][$i];
+          $dob=$_POST['dob'][$i];
+  
+  
+          $q="INSERT INTO Developer(first_name,last_name,gender,designation,DOB,website_url) VALUES('$fname','$lname','$gender','$designation','$dob','$website_url');"; 
+          $result=$con->query($q);
+          if($result==true){
+              echo "insert success";
+          }else{
+              echo mysqli_error($con);
+          }
+      
+      }
+      if (isset($_POST["fname"]) and isset($_POST["lname"]) and isset($_POST["gender"]) and isset($_POST["designation"]) and isset($_POST["dob"])  ) {
+          // Retrieving each selected option
+          foreach ($_POST['dob'] as $subject) {
+              print "You selected $subject<br/>";
+          }
+      }
+  }
+  
+
+
+
   $q="SELECT * from developer"; 
   $result=$con->query($q) or die($mysqli->error);    //an array
  
  ?>
 
-<p>All Developer details</p>
+<p>All Developer details: </p>
 <div class="justify-content-center">
 	<table class="table table-bordered table-striped">
 		<thead>
@@ -57,8 +89,26 @@
 </table>
 </div>
 
-<!--Developerd working on only klavona.com-->
-<p>All Developer details who are working in Klavona.com</p>
+
+<p>Enter the website url below to see info of developers working on the website</p>
+<form action="finaltable.php" method="POST">
+    <div class="form-group">
+                    <label>Website URL:</label>
+                    <input type="text" name="websiteurl2" id="websiteurl" class-"form-control" placeholder="website_url" required>
+    </div>
+    <button name="submitwebsite2" class="btn btn-warning" type="submit">Submit</button>
+</form>
+
+
+
+
+<?php 
+ if (isset($_POST['submitwebsite2']) && isset($_POST['websiteurl2'])) { 
+   $s=$_POST['websiteurl2']; 
+?>
+ 
+<!--Developerd working on only websiteurl inputed by user-->
+<p>All Developer details who are working in <?php echo $_POST['websiteurl2'];?> </p>
 <div class="justify-content-center">
 	<table class="table">
 		<thead>
@@ -75,11 +125,8 @@
 
 <!--$row is array that fetchs records-->
 <?php
- $q="SELECT * from developer WHERE website_url='klavona.com'; "; 
+ $q="SELECT * from developer WHERE website_url='$s'; "; 
  $result=$con->query($q) or die($mysqli->error);    //an array
-
-
-
 
 while($row=$result->fetch_assoc()){  ?>
 <tr>
@@ -99,16 +146,20 @@ while($row=$result->fetch_assoc()){  ?>
 </div>
 
 
-
-
+     
+    
+    
+    
+    
+    
 <?php 
-/*  $s='google.com'; 
-echo '<span>No of developers working on ' . $s .' is: </span>'; */
-echo '<span>No of developers working on klavona.com is: </span>';
-$q="SELECT count(*) FROM developer WHERE website_url='klavona.com';";
-$result=$con->query($q) or die($mysqli->error);    //an array
-$row=$result->fetch_array(MYSQLI_NUM);
-echo $row[0]; 
+    
+     echo '<span>No of developers working on ' . $s .' is: </span>';
+     $q="SELECT count(*) FROM developer WHERE website_url='$s';";
+     $result=$con->query($q) or die($mysqli->error);    //an array
+     $row=$result->fetch_array(MYSQLI_NUM);
+     echo $row[0];
+ }
 ?>
 <hr>
 <span> Click here to go: </span>
