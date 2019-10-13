@@ -89,7 +89,12 @@
 						<label for="firstName">First name</label>
 						<input id="firstName" name="firstName" type="text" placeholder="e.g. Bart" value="<?php getInputValue('firstName') ?>" required>
 					</p>
-
+ 
+					<p>
+						<?php echo $account->getError(Constants::$lastNameCharacters); ?>
+						<label for="firstName">last name</label>
+						<input id="firstName" name="lastName" type="text" placeholder="e.g. Bart" value="<?php getInputValue('lastName') ?>" required>
+					</p>
 
 
 					<p>
