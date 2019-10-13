@@ -26,9 +26,9 @@
 
 
 <div class="justify-content-center">
-	<table class="table">
+<table class="table table-bordered table-striped">
 		<thead>
-			<tr>
+			<tr class="bg-dark text-white">
 				<th>Visitor's Name</th>
 				<th>username</th>
 				<th>Visit Date</th>
@@ -51,16 +51,28 @@
 <?php } ?>
 </table>
 </div>
+<br>
+<p>Enter the website url below to get number of visitors visiting your website</p>
+<form action="logs.php" method="POST">
+    <div class="form-group">
+                    <label>Website URL:</label>
+                    <input type="text" name="websiteurl" id="websiteurl" class-"form-control" placeholder="website_url" required>
+    </div>
+    <button name="submitwebsite" class="btn btn-warning" type="submit">Submit</button>
+</form>
 
-<span>No of visitors who visited klavona.com is: </span>
-
-<?php 
-$q=" SELECT COUNT(*) FROM visits WHERE website_url='klavona.com';";
-$result=$con->query($q) or die($mysqli->error);    //an array
-$row=$result->fetch_array(MYSQLI_NUM);
-echo $row[0]; 
+<?php
+    if(isset($_POST['submitwebsite']) && isset($_POST['websiteurl']) ){
+        $s=$_POST['websiteurl'];
+        echo '<span>No of visitors visited ' . $s .' is: </span> ';
+        $q=" SELECT COUNT(*) FROM visits WHERE website_url='$s';";
+        $result=$con->query($q) or die($mysqli->error);    //an array
+        $row=$result->fetch_array(MYSQLI_NUM);
+        echo $row[0]; 
+    };
 ?>
-
+<br>
+<a href="search.php">Click here to go back</a>
 
 </body>
 </html>

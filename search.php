@@ -61,16 +61,24 @@ background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
         
         <?php
         if (isset($_POST['visit'])) {
-            $url=$_POST['search'];
-            echo $url;
-
-            $q="INSERT INTO Visits VALUES(CURDATE(),CURTIME(),'$userLoggedIn','$url')";  ;
-            $result=$con->query($q);
-            if($result==true){
-                echo "insert success";
+            if (isset($_SESSION['userLoggedIn'])) {
+                $url=$_POST['search'];
+                echo $url;
+    
+                $q="INSERT INTO Visits VALUES(CURDATE(),CURTIME(),'$userLoggedIn','$url')";  ;
+                $result=$con->query($q);
+                if($result==true){
+                    echo "insert success";
+                }else{
+                    echo mysqli_error($con);
+                }     
+               
             }else{
-                echo mysqli_error($con);
-            }     
+                header("Location: search.php");
+                echo "You need to login first !";
+            }
+
+
         }
         ?>
  </div>

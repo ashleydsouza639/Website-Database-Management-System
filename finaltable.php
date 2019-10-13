@@ -26,9 +26,9 @@
 
 <p>All Developer details</p>
 <div class="justify-content-center">
-	<table class="table">
+	<table class="table table-bordered table-striped">
 		<thead>
-			<tr>
+			<tr class="bg-dark text-white">
 				<th>Developer id</th>
 				<th>first name</th>
 				<th>last name</th>
@@ -99,10 +99,12 @@ while($row=$result->fetch_assoc()){  ?>
 </div>
 
 
-<span>No of developers working on klavona.com is: </span>
+
 
 <?php 
-
+/*  $s='google.com'; 
+echo '<span>No of developers working on ' . $s .' is: </span>'; */
+echo '<span>No of developers working on klavona.com is: </span>';
 $q="SELECT count(*) FROM developer WHERE website_url='klavona.com';";
 $result=$con->query($q) or die($mysqli->error);    //an array
 $row=$result->fetch_array(MYSQLI_NUM);
