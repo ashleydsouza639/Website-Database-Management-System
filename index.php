@@ -30,7 +30,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark">
 
-  <a class="navbar-brand" href="">webstats</a>
+  <a class="navbar-brand" href="index.php">webstats</a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02">
       <span class="navbar-toggler-icon"></span>
