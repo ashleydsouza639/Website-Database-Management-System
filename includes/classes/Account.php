@@ -53,8 +53,10 @@
 			$encryptedPw = md5($pw);
 			$profilePic = "assets/images/profile-pics/head_emerald.png";
 			$date = date("Y-m-d");
-
-			$result = mysqli_query($this->con, "INSERT INTO Visitor VALUES ('$un', '$fn', '$em', '$encryptedPw')");
+            
+            $randIP = "".mt_rand(0,255).".".mt_rand(0,255).".".mt_rand(0,255).".".mt_rand(0,255);
+    
+			$result = mysqli_query($this->con, "INSERT INTO Visitor VALUES ('$un', '$fn', '$em', '$encryptedPw','$randIP')") ;
 
 			return $result;
 		}

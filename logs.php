@@ -15,7 +15,7 @@
     
  <?php 
   include('config.php');
-  $q="SELECT visitor_name,visitor.visitor_id,vdate,vtime,website_url FROM visitor JOIN visits ON visitor.visitor_id=visits.visitor_id;";
+  $q="SELECT visitor_name,visitor.visitor_id,visitor.visitor_ip,vdate,vtime,website_url FROM visitor JOIN visits ON visitor.visitor_id=visits.visitor_id;";
   $result=$con->query($q) or die($mysqli->error);    //an array
  
  ?>
@@ -26,7 +26,8 @@
 		<thead>
 			<tr class="bg-dark text-white">
 				<th>Visitor's Name</th>
-				<th>username</th>
+                <th>username</th>
+                <th>Visitor's IP</th>
 				<th>Visit Date</th>
 			    <th>Visit Time</th>
                 <th>Website visited</th>
@@ -37,7 +38,8 @@
 <?php while($row=$result->fetch_assoc()){  ?>
 <tr>
 	<td><?php echo $row['visitor_name'];?></td>            
-	<td><?php echo $row['visitor_id'];?></td>
+    <td><?php echo $row['visitor_id'];?></td>
+    <td><?php echo $row['visitor_ip'];?></td> 
     <td><?php echo $row['vdate'];?></td>
     <td><?php echo $row['vtime'];?></td>
     <td><?php echo $row['website_url'];?></td>
@@ -69,7 +71,7 @@
 <?php
     if (isset($_POST['submitwebsite']) && isset($_POST['websiteurl'])) {
         $s=$_POST['websiteurl'];
-        $q="SELECT visitor_name,visitor.visitor_id,vdate,vtime,website_url FROM visitor JOIN visits ON visitor.visitor_id=visits.visitor_id where website_url='$s';";
+        $q="SELECT visitor_name,visitor_ip,visitor.visitor_id,visitor_ip,vdate,vtime,website_url FROM visitor JOIN visits ON visitor.visitor_id=visits.visitor_id where website_url='$s';";
         $result=$con->query($q) or die($mysqli->error);    //an array ?>
       <p>All visitor details who have visited <?php echo  $s ?> </p>
 <div class="justify-content-center">
@@ -77,7 +79,8 @@
 		<thead>
 			<tr class="bg-dark text-white">
 				<th>Visitor's Name</th>
-				<th>username</th>
+                <th>username</th>
+                <th>Visitor's IP</th>
 				<th>Visit Date</th>
 			    <th>Visit Time</th>
                 <th>Website visited</th>
@@ -87,11 +90,13 @@
 <!--$row is array that fetchs records-->
 <?php while ($row=$result->fetch_assoc()) {  ?>
 <tr>
-	<td><?php echo $row['visitor_name'];?></td>            
-	<td><?php echo $row['visitor_id'];?></td>
+    <td><?php echo $row['visitor_name'];?></td>            
+    <td><?php echo $row['visitor_id'];?></td>
+    <td><?php echo $row['visitor_ip'];?></td> 
     <td><?php echo $row['vdate'];?></td>
     <td><?php echo $row['vtime'];?></td>
     <td><?php echo $row['website_url'];?></td>
+    
     
 	
 </tr>

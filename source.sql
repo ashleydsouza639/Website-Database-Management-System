@@ -1,4 +1,4 @@
-create table Visitor(visitor_id VARCHAR(15),visitor_name varchar(20),email varchar(30), password varchar(32),primary key(visitor_id));
+create table Visitor(visitor_id VARCHAR(15),visitor_name varchar(20),email varchar(30), password varchar(32),visitor_ip varchar(50) ,primary key(visitor_id));
 
 create table Website(website_url varchar(20),website_type varchar(20),website_name
 varchar(20),primary key(website_url));
@@ -12,8 +12,8 @@ create table Visits(vdate date, vtime varchar(10),visitor_id varchar(15),website
 varchar(20),primary key(visitor_id,website_url),foreign key(visitor_id) references
 Visitor(visitor_id),foreign key(website_url) references Website(website_url));
 
-insert into Visitor values('glen121','Glen','glen121111992@gmail.com','5892563433d3e26e5775a8995f4101cd');
-insert into Visitor values('ashleydsouza882','Ashley','asheydsouza882@gmail.com','5892563433d3e26e5775a8995f4101cd');
+insert into Visitor values('glen121','Glen','glen121111992@gmail.com','5892563433d3e26e5775a8995f4101cd','192.168.0.1');
+insert into Visitor values('ashleydsouza882','Ashley','asheydsouza882@gmail.com','5892563433d3e26e5775a8995f4101cd','209.22.2.1');
 
 
 insert into Website values('google.com','searchengine','google');	
