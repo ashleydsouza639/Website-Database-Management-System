@@ -1,3 +1,4 @@
+<!--Contains code for visitor's history-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,12 +103,20 @@
         
         
 <?php
-        
-        echo '<span>No of visitors visited ' . $s .' is: </span> ';
+        echo '<span>Number of visitors who have  visited ' . $s .' is: </span> ';
         $q=" SELECT COUNT(*) FROM visits WHERE website_url='$s';";
         $result=$con->query($q) or die($mysqli->error);    //an array
         $row=$result->fetch_array(MYSQLI_NUM);
         echo $row[0];
+        $visitor=$row[0];
+        
+        echo '<br><span>Number of non-visitors who have not visited ' . $s .' is: </span> ';
+        $q=" SELECT COUNT(*) FROM visits;";
+        $result=$con->query($q) or die($mysqli->error);    //an array
+        $row=$result->fetch_array(MYSQLI_NUM);
+        $totalvisitor=$row[0];
+        $nonvisitor=$totalvisitor-$visitor;
+        echo $nonvisitor;
 };
 ?>
 <br>

@@ -68,8 +68,21 @@
                 <th>designation</th>
                 <th>DOB</th>
                 <th>website_url</th>
+                <th>Action</th>
             </tr>
 		</thead>
+
+<?php
+    if(isset($_GET['delete'])){
+    $id=$_GET['delete'];
+    $q="DELETE FROM developer WHERE developer_id='$id'";  
+    $con->query($q) or die(mysqli_error($conn));                //-> is . like object.attribute
+
+
+    header("location:finaltable.php");
+}
+?>
+
 
 <!--$row is array that fetchs records-->
 <?php while($row=$result->fetch_assoc()){  ?>
@@ -81,6 +94,7 @@
     <td><?php echo $row['designation'];?></td>
     <td><?php echo $row['DOB'];?></td>
     <td><?php echo $row['website_url'];?></td>
+    <td><a  class="btn btn-danger" href="finaltable.php?delete=<?php echo  $row['developer_id']; ?>">Delete</td>
     
     
 	

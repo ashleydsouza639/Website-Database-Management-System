@@ -17,7 +17,7 @@
 
 <html>
 <head>
-	<title>Welcome to Slotify!</title>
+	<title>Webstats Registration Page</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/register.css">
 
